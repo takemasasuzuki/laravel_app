@@ -55,7 +55,7 @@ class TodoController extends Controller
         $input['user_id'] = Auth::id();  // 追記
         $this->todo->fill($input)->save();
         //fill()で$inputの配列でtodoクラスのfillableで指定したキーと一致しているか確認し、Todoインスタンスのtitleプロパティに値を代入、saveでTodosテーブルに保存
-        return redirect()->to('todo');
+        return redirect()->route('todo.index');
     }
 
     /**
@@ -93,7 +93,7 @@ class TodoController extends Controller
     {
         $input = $request->all();
         $this->todo->find($id)->fill($input)->save();//SELECTとUPDATEのSQL文が発行される
-        return redirect()->to('todo');
+        return redirect()->route('todo.index');
     }
 
     /**
@@ -105,6 +105,6 @@ class TodoController extends Controller
     public function destroy($id)
     {
         $this->todo->find($id)->delete();//SELECTとDELETEのSQL文が発行される
-        return redirect()->to('todo');
+        return redirect()->route('todo.index');
     }
 }
